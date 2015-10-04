@@ -56,10 +56,10 @@ copyright = u'2015, Oliver Beckstein'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-# The short X.Y version.
-version = '1.0.0'
 # The full version, including alpha/beta/rc tags.
-release = version
+release = '1.0.1'
+# The short X.Y version.
+version = ".".join(release.split('.')[:2])
 
 # The minimum required MDAnalysis version (because we use
 # semantic versioning, all releases for a given version
