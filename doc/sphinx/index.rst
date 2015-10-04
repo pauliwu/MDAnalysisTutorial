@@ -48,6 +48,7 @@ Contents
 .. toctree::
    :maxdepth: 3
 
+   howto
    installation
    preparations
    basics

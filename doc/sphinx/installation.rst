@@ -1,5 +1,7 @@
 .. -*- coding: utf-8 -*-
 
+.. _chapter-installing-mdanalysis:
+
 =======================
  Installing MDAnalysis
 =======================
