@@ -1,0 +1,31 @@
+language: python
+python:
+  - '3.4'
+sudo: false
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda/bin:$PATH
+  - conda update --yes conda
+install:
+  - conda create --yes -q -n pyenv python=$TRAVIS_PYTHON_VERSION sphinx
+  - source activate pyenv
+script:
+  - |
+    test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
+    (cd ./doc/sphinx && make clean html)
+after_success:
+  - |
+    test ${TRAVIS_PULL_REQUEST} == "false" && \
+    test ${TRAVIS_BRANCH} == ${GH_DOC_BRANCH} && \
+    test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
+    bash ./ci/deploy_docs.sh
+env:
+  global:
+    - secure: aNUISxbQ26DD+sf7ARuLfWEpmsx0kjHrqRIXRjWZbT8dJWzQ+gbJJKYfjkoPHtZgo5nfRYEhWwIHj8Ux4lE8mnfYnWnyCTArtbsQp2oiFhvi4HDG8S3pIAeC19cDwaj5BxdU0u448YoV53qbjAJTLoVR5yaBguWUWWJ7nwR3Roo=
+    - GH_DOC_BRANCH: master
+    - GH_REPOSITORY: github.com/MDAnalysis/MDAnalysisTutorial.git
+    - GIT_CI_USER: TravisCI
+    - GIT_CI_EMAIL: TravisCI@mdanalysis.org
+    - MDA_DOCDIR: doc/pages/html
