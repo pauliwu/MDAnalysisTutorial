@@ -5,6 +5,10 @@
 This directory contains the set up for virtual machines (VM) using
 Vagrant_ with VirtualBox_
 
+.. _Vagrant: https://www.vagrantup.com/
+.. _VirtualBox: https://www.virtualbox.org/
+.. _ipython: http://ipython.org/
+
 You first need to install VirtualBox_ and Vagrant_ --- either through
 your package manager or by downloading the appropriate packages from
 their websites.
@@ -14,35 +18,10 @@ Linux machine that will automatically install itself with
 MDAnalysis. For the following to work, you will need an internet
 connection.
 
-.. _Vagrant: https://www.vagrantup.com/
-.. _VirtualBox: https://www.virtualbox.org/
-.. _ipython: http://ipython.org/
-.. _MDAnalysisTutorial repository:
-   https://github.com/orbeckst/MDAnalysisTutorial/ 
-
-
-Getting the MDAnalysis VM
-=========================
-
-Clone the `MDAnalysisTutorial repository`_ from github::
-
-  git clone https://github.com/orbeckst/MDAnalysisTutorial.git
-
-The VMs are in the ``vm`` sub-directory ::
-
-  cd  MDAnalysisTutorial/vm/
-
-To select a VM, ``cd`` into the specific directory, e.g. for a recent
-Ubuntu VM::
-
-  cd Ubuntu/14.04
-  
-
-
 Start/stop VM
 =============
 
-In the following, we are using an Ubuntu 14.04 VM::
+For example, Ubuntu 14.04::
   
   cd Ubuntu/14.04
   vagrant up
@@ -54,16 +33,13 @@ installed from the internet.
 The next time you run ``vagrant up`` it will be much faster.
 
 You can suspend the VM (saving its instantaneous state)::
-
   vagrant suspend
-
 or you can shut it down ::
-
   vagrant halt
-
 (Then the next ``up`` will boot up the VM.)
 
-.. Warning:: If you want to start completely fresh, run ``vagrant destroy``.
+.. Warning:: 
+   If you want to start completely fresh, run ``vagrant destroy``.
 
 
 Working with the VM
@@ -86,23 +62,13 @@ reflected in your real home directory, including deletion of files!
    directories in the VM so the virtual machine is not recommended for
    production analysis.)
 
-Within the VM you can then use MDAnlysis. For instance, start
-ipython_::
-
+Within the VM you can then use MDAnlysis. For instance, start ipython_::
   ipython
 
-Within ``ipython`` try out the following example. You can 
-
-* copy and paste line-by-line for interactive exploration, or 
-* copy and then use ``%paste`` in ``ipython``, or
-* save it to a file ``example.py`` and run with ``%run
-  example.py``
-
-Simple analysis (end-to-end distance and radius of gyration) of a
-protein (closed-to-open transition of adenylate kinase)::
-
-  # example.py
-    
+Within ``ipython`` (you can copy and paste line-by-line for
+interactive exploration or copy and the use ``%paste`` in
+``ipython``)::
+  
   import MDAnalysis
   from MDAnalysis.tests.datafiles import PSF, DCD
   import numpy.linalg
@@ -121,7 +87,7 @@ protein (closed-to-open transition of adenylate kinase)::
   for ts in u.trajectory:     # iterate through all frames
      r = cterm.pos - nterm.pos # end-to-end vector from atom positions
      d = numpy.linalg.norm(r)  # end-to-end distance
-     rgyr = bb.radiusOfGyration()  # method of a AtomGroup; updates with each frame
+     rgyr = bb.radius_of_gyration()  # method of a AtomGroup; updates with each frame
      data.append((ts.frame, u.trajectory.time, d, rgyr))
   data = numpy.array(data).transpose()
   frames, t, e2e, Rg = data  
