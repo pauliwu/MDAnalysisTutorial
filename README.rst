@@ -2,9 +2,11 @@
  MDAnalysis Tutorial
 =====================
 
+|docs| |build| 
+
 Tutorial for MDAnalysis_.
 
-.. _MDAnalysis: http://mdanalysis.googlecode.com
+.. _MDAnalysis: http://mdanalysis.org
 
 The online version of the tutorial is located at http://www.mdanalysis.org/MDAnalysisTutorial/
 
@@ -29,3 +31,14 @@ Most of the tutorial also exists in an Jupyter_ notebook under ``notebooks/MDAna
 .. _Jupyter: http://jupyter.org 
 .. _`MDAnalysisTutorial.ipynb`: 
    http://nbviewer.ipython.org/github/MDAnalysis/MDAnalysisTutorial/blob/master/notebooks/MDAnalysisTutorial.ipynb
+   
+   
+.. badges
+
+.. |build| image:: https://travis-ci.org/MDAnalysis/MDAnalysisTutorial.svg?branch=master
+    :target: https://travis-ci.org/MDAnalysis/MDAnalysisTutorial
+    :alt: Build status
+    
+.. |docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
+   :alt: Online Tutorial
+   :target: http://www.mdanalysis.org/MDAnalysisTutorial/
