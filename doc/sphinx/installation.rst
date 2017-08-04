@@ -19,10 +19,7 @@ as simple as ::
 
 In a less ideal setting, one typically has to install additional
 packages through the distribution's package manager as described in
-the links under :ref:`local-installation`. Alternatively, for this
-tutorial one can also set up a Linux :ref:`virtual-machine` that
-installs itself with everything needed and the most recent release of
-MDAnalysis.
+the links under :ref:`local-installation`. 
 
 .. Note:: For this tutorial, you will need at least version
           |MDAnalysis_version| of MDAnalysis.
@@ -79,43 +76,6 @@ The conda package includes the testsuite by default.
 .. _conda: http://conda.pydata.org/docs/get-started.html
 .. _Anaconda.org channel: https://anaconda.org/MDAnalysis
 
-.. _virtual-machine:
-
-Virtual machine
----------------
-
-For this tutorial you can also alternatively use a complete
-installation inside a :ref:`virtual-machine`.
-
-You will first need to clone the `tutorial git repository`_ with
-:program:`git`::
-
-  git clone https://github.com/MDAnalysis/MDAnalysisTutorial.git
-  cd MDAnalysisTutorial
-
-The directory ``vm`` contains configuration files for `vagrant`_
-virtual machines (VM) (using `VirtualBox`_). The file `vm/README.rst`_
-describes setup in more detail but provided that `vagrant`_ and
-`VirtualBox`_ are installed, the following should provide you with a
-working VM::
-
-  cd vm/Ubuntu/14.04
-  vagrant up
-  vagrant ssh
-
-When you are done, just exit the ssh session (``exit`` or Control-D)
-and halt the VM::
-
-  vagrant halt
-
-You can access your real home directory (:envvar:`$HOME`) in the virtual
-machine at the path ``/myhome``. Anything that you do in this
-directory will be reflected in your real home directory, including
-deletion of files!
-
-.. _Vagrant: https://www.vagrantup.com/
-.. _VirtualBox: https://www.virtualbox.org/
-
 
 
 Testing the installation
@@ -123,17 +83,11 @@ Testing the installation
 
 .. _test cases: http://wiki.mdanalysis.org/UnitTests
 
-MDAnalysis comes with over 2500 `test cases`_ that check its
+MDAnalysis comes with over 5000 `test cases`_ that check its
 functionality. These test cases can be run with the command ::
 
-  python -c 'from MDAnalysis.tests import test; test(label="full", verbose=3, extra_argv=["--exe"])'
+  python -c 'from MDAnalysis.tests import test; test()'
 
 This can take a few minutes. Ideally, you should only get passing
 tests ("ok" or just a single dot "." when using :code:`verbose=1`) or
 "KnownFailures".
-
-.. Note::
-   The test suite consumes a considerable amount of memory (> 4GB) and
-   thus it might fail or become very slow on machines with
-   insufficient memory such as a :ref:`virtual-machine`. (This is a known
-   problem with the test suite and will be addressed in the future.)
