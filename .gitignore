@@ -7,4 +7,5 @@ notebooks/*.pdf
 notebooks/*.pdb
 notebooks/*.ndx
 tmp
+doc/pages
 
