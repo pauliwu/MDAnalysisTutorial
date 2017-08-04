@@ -23,7 +23,7 @@ after_success:
     bash ./ci/deploy_docs.sh
 env:
   global:
-    - secure: aNUISxbQ26DD+sf7ARuLfWEpmsx0kjHrqRIXRjWZbT8dJWzQ+gbJJKYfjkoPHtZgo5nfRYEhWwIHj8Ux4lE8mnfYnWnyCTArtbsQp2oiFhvi4HDG8S3pIAeC19cDwaj5BxdU0u448YoV53qbjAJTLoVR5yaBguWUWWJ7nwR3Roo=
+    - secure: "abyGePpHGyLK9u7V/A+dR7T54M02NVDewD/kuqvQ+KE77hKMpZNcWl/nFHJnFEGdV2RLPEo/W/LIr33LtH09s6jkvyBBkpxtCXy9AvIra2FUJIbYBsAhOX2CYviM7EyL27IUCdqTKEmJBX+0cYFS/v68PtHJWXTGW/hlBBNZNII="
     - GH_DOC_BRANCH: master
     - GH_REPOSITORY: github.com/MDAnalysis/MDAnalysisTutorial.git
     - GIT_CI_USER: TravisCI
