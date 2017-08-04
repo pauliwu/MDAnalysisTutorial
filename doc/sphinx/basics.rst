@@ -9,7 +9,7 @@
 We discuss the fundamental objects in MDAnalysis, the
 :ref:`universe-and-atomgroup`, and the facilities for
 :ref:`selections` of atoms. These selections themselves are again an
-:class:`~MDAnalysis.core.AtomGroup.AtomGroup`.
+:class:`~MDAnalysis.core.groups.AtomGroup`.
 
 
 .. _universe-and-atomgroup:
@@ -18,22 +18,22 @@ Universe and AtomGroup
 ======================
 
 MDAnalysis is **object oriented**. Molecular systems consist of
-:class:`~MDAnalysis.core.AtomGroup.Atom` objects (instances of the
-class :class:`MDAnalysis.core.AtomGroup.Atom`), which are grouped in
-:class:`~MDAnalysis.core.AtomGroup.AtomGroup` instances. You build the
-:class:`~MDAnalysis.core.AtomGroup.AtomGroup` of your system by
+:class:`~MDAnalysis.core.groups.Atom` objects (instances of the
+class :class:`MDAnalysis.core.groups.Atom`), which are grouped in
+:class:`~MDAnalysis.core.groups.AtomGroup` instances. You build the
+:class:`~MDAnalysis.core.groups.AtomGroup` of your system by
 loading a **topology** (list of atoms and possibly their connectivity)
 together with a **trajectory** (coordinate information) into the
 central data structure, the
-:class:`~MDAnalysis.core.AtomGroup.Universe` object::
+:class:`~MDAnalysis.core.groups.Universe` object::
 
   >>> u = MDAnalysis.Universe(PSF, DCD)
   >>> print(u)
   <Universe with 3341 atoms>
 
 The atoms are stored in the attribute
-:attr:`~MDAnalysis.core.AtomGroup.Universe.atoms` of the
-:class:`MDAnalysis.core.AtomGroup.Universe`::
+:attr:`~MDAnalysis.core.groups.Universe.atoms` of the
+:class:`MDAnalysis.core.groups.Universe`::
 
   >>> print(u.atoms)
   <AtomGroup with 3341 atoms>
@@ -44,12 +44,12 @@ The atoms are stored in the attribute
    < Atom 4: name 'HT3' of type '2' of resname 'MET', resid 1 and segid '4AKE'>,
    < Atom 5: name 'CA' of type '22' of resname 'MET', resid 1 and segid '4AKE'>]
 
-Any :class:`~MDAnalysis.core.AtomGroup.AtomGroup` knows the residues
+Any :class:`~MDAnalysis.core.groups.AtomGroup` knows the residues
 that the atoms belong to via the attribute
-:attr:`~MDAnalysis.core.AtomGroup.AtomGroup.residues`, which produces a
-:class:`~MDAnalysis.core.AtomGroup.ResidueGroup`. A
-:class:`~MDAnalysis.core.AtomGroup.ResidueGroup` acts like a list of
-:class:`~MDAnalysis.core.AtomGroup.Residue` objects::
+:attr:`~MDAnalysis.core.groups.AtomGroup.residues`, which produces a
+:class:`~MDAnalysis.core.groups.ResidueGroup`. A
+:class:`~MDAnalysis.core.groups.ResidueGroup` acts like a list of
+:class:`~MDAnalysis.core.groups.Residue` objects::
 
   >>> u.atoms[100:130].residues
   <ResidueGroup with 3 residues>
@@ -57,15 +57,15 @@ that the atoms belong to via the attribute
   [<Residue LEU, 6>, <Residue GLY, 7>, <Residue ALA, 8>]
 
 Larger organizational units are
-:class:`~MDAnalysis.core.AtomGroup.Segment` instances, for example one
+:class:`~MDAnalysis.core.groups.Segment` instances, for example one
 protein or all the solvent molecules or simply the whole
-system. :class:`~MDAnalysis.core.AtomGroup.Atom`,
-:class:`~MDAnalysis.core.AtomGroup.AtomGroup`,
-:class:`~MDAnalysis.core.AtomGroup.Residue`, and
-:class:`~MDAnalysis.core.AtomGroup.ResidueGroup` have an
-attribute :attr:`~MDAnalysis.core.AtomGroup.AtomGroup.segments` that
+system. :class:`~MDAnalysis.core.groups.Atom`,
+:class:`~MDAnalysis.core.groups.AtomGroup`,
+:class:`~MDAnalysis.core.groups.Residue`, and
+:class:`~MDAnalysis.core.groups.ResidueGroup` have an
+attribute :attr:`~MDAnalysis.core.groups.AtomGroup.segments` that
 will list the segment IDs ("segids") as a
-:class:`~MDAnalysis.core.AtomGroup.SegmentGroup`::
+:class:`~MDAnalysis.core.groups.SegmentGroup`::
 
   >>> u.atoms.segments
   <SegmentGroup with 1 segment>
@@ -73,10 +73,10 @@ will list the segment IDs ("segids") as a
   [<Segment 4AKE>]  
 
 The converse is also true: each "higher" level in the hierarchy also
-know about the :class:`~MDAnalysis.core.AtomGroup.Residue` and
-:class:`~MDAnalysis.core.AtomGroup.Atom` instances it contains. For
+know about the :class:`~MDAnalysis.core.groups.Residue` and
+:class:`~MDAnalysis.core.groups.Atom` instances it contains. For
 example, to list the atoms of the
-:class:`~MDAnalysis.core.AtomGroup.ResidueGroup` we had before::
+:class:`~MDAnalysis.core.groups.ResidueGroup` we had before::
 
   >>> r = u.atoms[100:130].residues
   >>> r.atoms
@@ -103,7 +103,7 @@ Exercise 1
    slice of atoms.
 
 3. How many residues are in the
-   :class:`~MDAnalysis.core.AtomGroup.AtomGroup.Universe` ``u``? ::
+   :class:`~MDAnalysis.core.groups.AtomGroup.Universe` ``u``? ::
 
      >>> len(u.atoms.residues)
      >>> u.atoms.n_residues
@@ -119,7 +119,7 @@ Exercise 1
      >>> list(zip(resnames, resids))
 
    How do you obtain the resid and the resname for the 100th residue?
-   (Hint: investigate the :class:`~MDAnalysis.core.AtomGroup.Residue`
+   (Hint: investigate the :class:`~MDAnalysis.core.groups.Residue`
    object interactively with :kbd:`TAB` completion) ::
 
      >>> r100 = u.atoms.residues[99]
@@ -135,7 +135,7 @@ Exercise 1
      1
 
    What is the segment identifier of the first
-   :class:`~MDAnalysis.core.AtomGroup.Segment`? ::
+   :class:`~MDAnalysis.core.groups.Segment`? ::
 
      >>> s1 = u.segments[0]
      >>> s1.id
@@ -144,9 +144,9 @@ Exercise 1
 
 .. SeeAlso:: 
 
-   Methods of :class:`~MDAnalysis.core.AtomGroup.AtomGroup`,
-   :class:`~MDAnalysis.core.AtomGroup.ResidueGroup`, and
-   :class:`~MDAnalysis.core.AtomGroup.SegmentGroup`
+   Methods of :class:`~MDAnalysis.core.groups.AtomGroup`,
+   :class:`~MDAnalysis.core.groups.ResidueGroup`, and
+   :class:`~MDAnalysis.core.groups.SegmentGroup`
            
    * :attr:`~MDAnalysis.core.groups.AtomGroup.n_residues` and 
      :attr:`~MDAnalysis.core.groups.AtomGroup.n_atoms`
@@ -163,15 +163,15 @@ Selections
 
 MDAnalysis comes with a fairly complete `atom selection`_
 facility. Primarily, one uses the method
-:meth:`~MDAnalysis.core.AtomGroup.Universe.select_atoms` of a
-:class:`~MDAnalysis.core.AtomGroup.Universe`::
+:meth:`~MDAnalysis.core.groups.Universe.select_atoms` of a
+:class:`~MDAnalysis.core.groups.Universe`::
 
   >>> CA = u.select_atoms("protein and name CA")
   >>> CA
   >>> <AtomGroup with 214 atoms>
 
-but really any :class:`~MDAnalysis.core.AtomGroup.AtomGroup` has a
-:meth:`~MDAnalysis.core.AtomGroup.AtomGroup.select_atoms` method::
+but really any :class:`~MDAnalysis.core.groups.AtomGroup` has a
+:meth:`~MDAnalysis.core.groups.AtomGroup.select_atoms` method::
 
   >>> acidic = CA.select_atoms("resname ASP or resname GLU")
   >>> acidic
