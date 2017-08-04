@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>MDAnalysis Tutorial &#8212; MDAnalysis Tutorial 1.1.0 documentation</title>
+    <title>References &#8212; MDAnalysis Tutorial 1.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -25,7 +25,7 @@
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="How to use this tutorial" href="howto.html" />
+    <link rel="prev" title="Using the MDAnalysis.analysis modules" href="analysismodule.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,62 +41,46 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="mdanalysis-tutorial">
-<h1>MDAnalysis Tutorial<a class="headerlink" href="#mdanalysis-tutorial" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+  <div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<table class="docutils citation" frame="void" id="gowers2016" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">MDAnalysis version:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">≥ 0.16.2</td>
-</tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Tutorial release:</th></tr>
-<tr class="field-even field"><td>&#160;</td><td class="field-body">1.1.0</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Last updated:</th><td class="field-body">Aug 04, 2017</td>
-</tr>
+<tr><td class="label">[Gowers2016]</td><td>R. J. Gowers, M. Linke, J. Barnoud, T. J. E. Reddy, M. N.
+Melo, S. L. Seyler, D. L. Dotson, J. Domanski, S. Buchoux, I. M. Kenney,
+and O. Beckstein. <a class="reference external" href="http://conference.scipy.org/proceedings/scipy2016/oliver_beckstein.html">MDAnalysis: A Python package for the rapid analysis of
+molecular dynamics simulations</a>. In S. Benthall and S. Rostrup, editors,
+<em>Proceedings of the 15th Python in Science Conference</em>, pages 102 – 109,
+Austin, TX, 2016. SciPy.</td></tr>
 </tbody>
 </table>
-<p><a class="reference external" href="http://www.mdanalysis.org">MDAnalysis</a> is an open source Python library that helps you to quickly
-write your own analysis algorithm for studying trajectories produced
-by the most popular simulation packages <a class="reference internal" href="references.html#gowers2016" id="id1">[Gowers2016]</a>
-<a class="reference internal" href="references.html#michaud-agrawal2011" id="id2">[Michaud-Agrawal2011]</a>.</p>
-<p>This tutorial serves as an <strong>introduction to MDAnalysis</strong>. It starts
-out with <em>installing the library</em> and then introduces the key components
-of the library. It will show you</p>
-<ul class="simple">
-<li>how to load a structure or a MD trajectory;</li>
-<li>how to select parts of your system;</li>
-<li>how to work with atoms, residues and molecules through the object-oriented
-interface of MDAnalysis;</li>
-<li>how to analyze MD trajectories;</li>
-<li>how to write out modified trajectories;</li>
-<li>how to use algorithms in the  <a class="reference external" href="http://docs.mdanalysis.org/documentation_pages/analysis_modules.html">MDAnalysis.analysis</a> module
-(intermediate level of difficulty)</li>
-</ul>
-<p>The tutorial contains many links to the <a class="reference external" href="http://docs.mdanalysis.org/">online documentation</a> ,
-which you can use to learn more about the functions, classes, an
-methods that are discussed. The online help together with the
-interactive Python documentation (<code class="docutils literal"><span class="pre">help(...)</span></code> or <code class="docutils literal"><span class="pre">...?</span></code> in
-<strong class="program">ipython</strong>) should help you while you are using the library.</p>
-<p>If you have <strong>questions or suggestions</strong> please post them in the
-<a class="reference external" href="http://groups.google.com/group/mdnalysis-discussion">MDAnalysis User Discussion Group</a>.</p>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use this tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing MDAnalysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preparations.html">Preparations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="atomgroups.html">Working with AtomGroups</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trajectories.html">Trajectory analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="writing.html">Writing coordinates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysismodule.html">Using the MDAnalysis.analysis modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-</ul>
-</div>
-</div>
+<table class="docutils citation" frame="void" id="michaud-agrawal2011" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Michaud-Agrawal2011]</td><td>N. Michaud-Agrawal, E. J. Denning, T. B. Woolf,
+and O. Beckstein. MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics
+Simulations. <em>J. Comput. Chem.</em> <strong>32</strong> (2011),
+2319–2327. doi:<a class="reference external" href="http://doi.org/10.1002/jcc.21787">10.1002/jcc.21787</a> PMCID:<a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3144279">PMC3144279</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="beckstein2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Beckstein2009]</td><td>O Beckstein. EJ Denning, JR Perilla, and TB
+Woolf. Zipping and Unzipping of Adenylate Kinase: Atomistic
+Insights into the Ensemble of Open/Closed Transitions. <em>J Mol Biol</em>
+<strong>394</strong> (2009), 160–176. doi:<a class="reference external" href="http://doi.org/10.1016/j.jmb.2009.09.009">10.1016/j.jmb.2009.09.009</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="seyler2014" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Seyler2014]</td><td>L. Seyler and O. Beckstein. Sampling of large
+conformational transitions: Adenylate kinase as a testing
+ground. <em>Molec. Simul.</em> <strong>40</strong> (2014), 855–877. doi:
+<a class="reference external" href="http://doi.org/10.1080/08927022.2014.919497">10.1080/08927022.2014.919497</a>.</td></tr>
+</tbody>
+</table>
 </div>
 
 
@@ -106,7 +90,7 @@ interactive Python documentation (<code class="docutils literal"><span class="pr
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <p class="logo">
-  <a href="#">
+  <a href="index.html">
     <img class="logo" src="_static/logos/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
     
   </a>
@@ -122,7 +106,7 @@ interactive Python documentation (<code class="docutils literal"><span class="pr
 
 
 <h3>Navigation</h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="howto.html">How to use this tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installing MDAnalysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preparations.html">Preparations</a></li>
@@ -131,7 +115,7 @@ interactive Python documentation (<code class="docutils literal"><span class="pr
 <li class="toctree-l1"><a class="reference internal" href="trajectories.html">Trajectory analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="writing.html">Writing coordinates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysismodule.html">Using the MDAnalysis.analysis modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">References</a></li>
 </ul>
 
 
@@ -154,8 +138,8 @@ interactive Python documentation (<code class="docutils literal"><span class="pr
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="howto.html" title="next chapter">How to use this tutorial</a></li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="analysismodule.html" title="previous chapter">Using the MDAnalysis.analysis modules</a></li>
   </ul></li>
 </ul>
 </div>
@@ -181,7 +165,7 @@ interactive Python documentation (<code class="docutils literal"><span class="pr
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
-      <a href="_sources/index.rst.txt"
+      <a href="_sources/references.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

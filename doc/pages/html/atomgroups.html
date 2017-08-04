@@ -1,93 +1,41 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Working with AtomGroups &mdash; MDAnalysis Tutorial 1.0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <title>Working with AtomGroups &#8212; MDAnalysis Tutorial 1.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.2',
+        VERSION:     '1.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis Tutorial 1.0.2 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Trajectory analysis" href="trajectories.html" />
-    <link rel="prev" title="Basics" href="basics.html" /> 
-  </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="trajectories.html" title="Trajectory analysis"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="basics.html" title="Basics"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
-            </a></p>
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Working with AtomGroups</a><ul>
-<li><a class="reference internal" href="#important-methods-and-attributes-of-atomgroup">Important methods and attributes of AtomGroup</a></li>
-<li><a class="reference internal" href="#exercises-3">Exercises 3</a></li>
-<li><a class="reference internal" href="#processing-atomgroups">Processing AtomGroups</a></li>
-</ul>
-</li>
-</ul>
+    <link rel="prev" title="Basics" href="basics.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="basics.html"
-                        title="previous chapter">Basics</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="trajectories.html"
-                        title="next chapter">Trajectory analysis</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/atomgroups.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+  </head>
+  <body>
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -96,49 +44,49 @@
             
   <div class="section" id="working-with-atomgroups">
 <h1>Working with AtomGroups<a class="headerlink" href="#working-with-atomgroups" title="Permalink to this headline">¶</a></h1>
-<p>A <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.11)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> has a large number of
+<p>A <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.15)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> has a large number of
 methods attributes defined that provide information about the atoms
 such as names, indices, or the coordinates in the
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.positions" title="(in MDAnalysis v0.11)"><code class="xref py py-attr docutils literal"><span class="pre">positions</span></code></a> attribute:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">CA</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;protein and name CA&quot;</span><span class="p">)</span>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.positions" title="(in MDAnalysis v0.15)"><code class="xref py py-attr docutils literal"><span class="pre">positions</span></code></a> attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CA</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein and name CA&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">CA</span><span class="o">.</span><span class="n">positions</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(214, 3)</span>
 </pre></div>
 </div>
-<p>The resulting output is a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>. The main purpose of
+<p>The resulting output is a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.13)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>. The main purpose of
 MDAnalysis is to get trajectory data into numpy arrays!</p>
 <div class="section" id="important-methods-and-attributes-of-atomgroup">
 <h2>Important methods and attributes of AtomGroup<a class="headerlink" href="#important-methods-and-attributes-of-atomgroup" title="Permalink to this headline">¶</a></h2>
-<p>The coordinates <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.positions" title="(in MDAnalysis v0.11)"><code class="xref py py-attr docutils literal"><span class="pre">positions</span></code></a>
+<p>The coordinates <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.positions" title="(in MDAnalysis v0.15)"><code class="xref py py-attr docutils literal"><span class="pre">positions</span></code></a>
 attribute is probably the most important information that you can get
-from an <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.11)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
+from an <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.15)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
 <p>Other quantities that can be easily calculated for a
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.11)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> are</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.15)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> are</p>
 <ul>
 <li><p class="first">the center of mass
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.center_of_mass" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">center_of_mass()</span></code></a> and the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.center_of_mass" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">center_of_mass()</span></code></a> and the
 center of geoemtry (or centroid)
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">center_of_geometry()</span></code></a>
 (equivalent to
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.centroid" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">centroid()</span></code></a>);</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.centroid" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">centroid()</span></code></a>);</p>
 </li>
 <li><p class="first">the total mass
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_mass" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">total_mass()</span></code></a>;</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_mass" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">total_mass()</span></code></a>;</p>
 </li>
 <li><p class="first">the total charge
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_charge" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">total_charge()</span></code></a> (if partial
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_charge" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">total_charge()</span></code></a> (if partial
 charges are defined in the topology);</p>
 </li>
 <li><p class="first">the radius of gyration</p>
 <div class="math">
 \[R_\mathrm{gyr} = \sqrt{\frac{1}{M}\sum_{i=1}^{N} m_i(\mathbf{r}_i - \mathbf{R})^2}\]</div>
-<p>with <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.radius_of_gyration" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">radius_of_gyration()</span></code></a>;</p>
+<p>with <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.radius_of_gyration" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">radius_of_gyration()</span></code></a>;</p>
 </li>
 <li><p class="first">the principal axes <span class="math">\(\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_1\)</span>
-from <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.principal_axes" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">principal_axes()</span></code></a> via
+from <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.principal_axes" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">principal_axes()</span></code></a> via
 a diagonalization of the tensor of inertia
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.moment_of_inertia" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">moment_of_inertia()</span></code></a>,</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.moment_of_inertia" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">moment_of_inertia()</span></code></a>,</p>
 <div class="math">
 \[\Lambda = U^T I U, \quad \text{with}\  U=(\mathbf{p}_1,
 \mathbf{p}_2, \mathbf{p}_3)\]</div>
@@ -164,18 +112,18 @@ known as the principal moments of inertia, and <span class="math">\(I =
 <ol class="arabic">
 <li><p class="first">Calculate the center of mass and the center of geometry for each of
 the three domains.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">domains</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&#39;CORE&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;protein and (resid 1-29 or resid 60-121 or resid 160-214)&quot;</span><span class="p">),</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&#39;NMP&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;protein and resid 30-59&quot;</span><span class="p">),</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&#39;LID&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;protein and resid 122-159&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domains</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;CORE&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein and (resid 1-29 or resid 60-121 or resid 160-214)&quot;</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;NMP&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein and resid 30-59&quot;</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;LID&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein and resid 122-159&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">centroid</span><span class="p">())</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">dom</span> <span class="ow">in</span> <span class="n">domains</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">dom</span> <span class="ow">in</span> <span class="n">domains</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span>
 <span class="go">{&#39;LID&#39;: array([-15.16074944,   2.11599636,  -4.37305355], dtype=float32),</span>
 <span class="go"> &#39;CORE&#39;: array([ 4.43884087,  2.05389476,  1.63895261], dtype=float32),</span>
 <span class="go"> &#39;NMP&#39;: array([ -2.99990702, -13.62531662,  -2.93235731], dtype=float32)}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
 <span class="go">{&#39;LID&#39;: array([-15.11337499,   2.12292226,  -4.40910485]),</span>
 <span class="go"> &#39;CORE&#39;: array([ 4.564116  ,  2.08700105,  1.54992649]),</span>
 <span class="go"> &#39;NMP&#39;: array([ -3.20330174, -13.60247613,  -3.06221538])}</span>
@@ -183,24 +131,24 @@ the three domains.</p>
 </div>
 <ul>
 <li><p class="first">What are the distances between the centers of mass?</p>
-<p>(Hint: you can use <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm" title="(in NumPy v1.9)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.norm()</span></code></a> or calculate it
+<p>(Hint: you can use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.norm.html#numpy.linalg.norm" title="(in NumPy v1.13)"><code class="xref py py-func docutils literal"><span class="pre">numpy.linalg.norm()</span></code></a> or calculate it
 manually.)</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s">&#39;NMP&#39;</span><span class="p">]))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s1">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s1">&#39;NMP&#39;</span><span class="p">]))</span>
 <span class="go">18.1042626244</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s">&#39;LID&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s1">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s1">&#39;LID&#39;</span><span class="p">]))</span>
 <span class="go">20.5600339602</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s">&#39;NMP&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s">&#39;LID&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="s1">&#39;NMP&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cm</span><span class="p">[</span><span class="s1">&#39;LID&#39;</span><span class="p">]))</span>
 <span class="go">19.7725089609</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Does it matter to use center of mass vs center of geometry?</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s">&#39;NMP&#39;</span><span class="p">]))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s1">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s1">&#39;NMP&#39;</span><span class="p">]))</span>
 <span class="go">17.9463</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s">&#39;LID&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s1">&#39;CORE&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s1">&#39;LID&#39;</span><span class="p">]))</span>
 <span class="go">20.501</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s">&#39;NMP&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s">&#39;LID&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="s1">&#39;NMP&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cg</span><span class="p">[</span><span class="s1">&#39;LID&#39;</span><span class="p">]))</span>
 <span class="go">19.9437</span>
 </pre></div>
 </div>
@@ -213,7 +161,7 @@ manually.)</p>
 move relative to the CORE domain. The movement can be characterized by two
 angles, <span class="math">\(\theta_\text{NMP}\)</span> and <span class="math">\(\theta_\text{LID}\)</span>, which are
 defined between the <em>centers of geometry</em> of the <em>backbone and</em>
-<span class="math">\(\text{C}_\beta\)</span> atoms between groups of residues <a class="reference internal" href="index.html#beckstein2009" id="id1">[Beckstein2009]</a>:</p>
+<span class="math">\(\text{C}_\beta\)</span> atoms between groups of residues <a class="reference internal" href="references.html#beckstein2009" id="id1">[Beckstein2009]</a>:</p>
 <dl class="docutils">
 <dt>definition of <span class="math">\(\theta_\text{NMP}\)</span></dt>
 <dd>A: 115-125, B: 90-100, C: 35-55</dd>
@@ -230,35 +178,35 @@ as an argument and computes <span class="math">\(\theta_\text{NMP}\)</span>:</p>
 <dt id="theta_NMP">
 <code class="descname">theta_NMP</code><span class="sig-paren">(</span><em>u</em><span class="sig-paren">)</span><a class="headerlink" href="#theta_NMP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the NMP-CORE angle for E. coli AdK in degrees from
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="(in MDAnalysis v0.11)"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> <em>u</em></p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="(in MDAnalysis v0.15)"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> <em>u</em></p>
 </dd></dl>
 
 <p>Use the following <em>incomplete</em> code as a starting point:</p>
-<div class="highlight-python"><div class="highlight"><pre>import numpy as np
-from numpy.linalg import norm
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">norm</span>
 
-def theta_NMP(u):
-   &quot;&quot;&quot;Calculate the NMP-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;
-   A = u.select_atoms(&quot;resid 115:125 and (backbone or name CB)&quot;).center_of_geometry()
-   B =
-   C =
-   BA = A - B
-   BC =
-   theta = np.arccos(
-   return np.rad2deg(theta)
+<span class="k">def</span> <span class="nf">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot;Calculate the NMP-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
+   <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+   <span class="n">B</span> <span class="o">=</span>
+   <span class="n">C</span> <span class="o">=</span>
+   <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+   <span class="n">BC</span> <span class="o">=</span>
+   <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span>
+   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Write the function to file <code class="file docutils literal"><span class="pre">adk.py</span></code> and inside <strong class="program">ipython</strong> run
 the file with <code class="code docutils literal"><span class="pre">%run</span> <span class="pre">adk.py</span></code> to load the function while working on it.</p>
 <p>Test it on the AdK simulation (actually, the first frame):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="go">44.124821</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Add the corresponding function <code class="xref py py-func docutils literal"><span class="pre">theta_LID()</span></code> to <code class="file docutils literal"><span class="pre">adk.py</span></code>.</p>
 <p>Test it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="go">107.00881</span>
 </pre></div>
 </div>
@@ -266,7 +214,7 @@ the file with <code class="code docutils literal"><span class="pre">%run</span> 
 </ol>
 <p>(See below for a solution.)</p>
 <p class="rubric">Calculation of the domain angles of AdK</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -287,14 +235,15 @@ the file with <code class="code docutils literal"><span class="pre">%run</span> 
 19
 20
 21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">norm</span>
 
 <span class="k">def</span> <span class="nf">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate the NMP-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 90:100 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 35:55 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 90:100 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 35:55 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
     <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
     <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
@@ -302,36 +251,37 @@ the file with <code class="code docutils literal"><span class="pre">%run</span> 
 
 <span class="k">def</span> <span class="nf">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate the LID-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 179:185 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
-    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 125:153 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 179:185 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 125:153 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
     <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
     <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
 </pre></div>
 </td></tr></table></div>
 </div>
 <div class="section" id="processing-atomgroups">
 <span id="id2"></span><h2>Processing AtomGroups<a class="headerlink" href="#processing-atomgroups" title="Permalink to this headline">¶</a></h2>
-<p>You can directly write a <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.11)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
-to a file with the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a>
+<p>You can directly write a <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.15)"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+to a file with the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a>
 method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CORE</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 1:29 or resid 60:121 or resid 160:214&quot;</span><span class="p">)</span>
-<span class="n">CORE</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;AdK_CORE.pdb&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CORE</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 1:29 or resid 60:121 or resid 160:214&quot;</span><span class="p">)</span>
+<span class="n">CORE</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;AdK_CORE.pdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>(The extension determines the file type.)</p>
 <p>You can do fairly complicated things on the fly, such as writing the
 hydration shell around a protein to a file</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;byres (name OW and around 4.0 protein)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;hydration_shell.pdb&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;byres (name OW and around 4.0 protein)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;hydration_shell.pdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>for further analysis or visualization.</p>
-<p>You can also write <a class="reference external" href="http://www.gromacs.org">Gromacs</a> index files (in case you don&#8217;t like
-<strong class="program">make_ndx</strong>...) with the
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write_selection" title="(in MDAnalysis v0.11)"><code class="xref py py-meth docutils literal"><span class="pre">write_selection()</span></code></a> method:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CORE</span><span class="o">.</span><span class="n">write_selection</span><span class="p">(</span><span class="s">&quot;CORE.ndx&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;CORE&quot;</span><span class="p">)</span>
+<p>You can also write <a class="reference external" href="http://www.gromacs.org">Gromacs</a> index files (in case you don’t like
+<strong class="program">make_ndx</strong>…) with the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write_selection" title="(in MDAnalysis v0.15)"><code class="xref py py-meth docutils literal"><span class="pre">write_selection()</span></code></a> method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CORE</span><span class="o">.</span><span class="n">write_selection</span><span class="p">(</span><span class="s2">&quot;CORE.ndx&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CORE&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -349,26 +299,95 @@ hydration shell around a protein to a file</p>
           </div>
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logos/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How to use this tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparations.html">Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with AtomGroups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectories.html">Trajectory analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing.html">Writing coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysismodule.html">Using the MDAnalysis.analysis modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="http://mdanalysis.org">MDAnalysis</a></li>
+    
+    <li class="toctree-l1"><a href="http://docs.mdanalysis.org">docs</a></li>
+    
+    <li class="toctree-l1"><a href="http://wiki.mdanalysis.org">wiki</a></li>
+    
+    <li class="toctree-l1"><a href="http://users.mdanalysis.org">user discussion group</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/mdanalysis">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://twitter.com/mdanalysis">@mdanalysis</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="basics.html" title="previous chapter">Basics</a></li>
+      <li>Next: <a href="trajectories.html" title="next chapter">Trajectory analysis</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="trajectories.html" title="Trajectory analysis"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="basics.html" title="Basics"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
-      </ul>
+    <div class="footer">
+      &copy;2015-2017, Oliver Beckstein.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/atomgroups.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
-    <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
-    </div>
+
+    
+    <a href="https://github.com/MDAnalysis/mdanalysis" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
   </body>
 </html>
