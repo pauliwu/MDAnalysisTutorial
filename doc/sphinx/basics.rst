@@ -52,7 +52,9 @@ that the atoms belong to via the attribute
 :class:`~MDAnalysis.core.AtomGroup.Residue` objects::
 
   >>> u.atoms[100:130].residues
-  <ResidueGroup [<Residue 'LEU', 6>, <Residue 'GLY', 7>, <Residue 'ALA', 8>]>
+  <ResidueGroup with 3 residues>
+  >>> list(u.atoms[100:130].residues)
+  [<Residue LEU, 6>, <Residue GLY, 7>, <Residue ALA, 8>]
 
 Larger organizational units are
 :class:`~MDAnalysis.core.AtomGroup.Segment` instances, for example one
@@ -66,7 +68,9 @@ will list the segment IDs ("segids") as a
 :class:`~MDAnalysis.core.AtomGroup.SegmentGroup`::
 
   >>> u.atoms.segments
-  <SegmentGroup [<Segment '4AKE'>]>
+  <SegmentGroup with 1 segment>
+  >>> list(u.atoms.segments)
+  [<Segment 4AKE>]  
 
 The converse is also true: each "higher" level in the hierarchy also
 know about the :class:`~MDAnalysis.core.AtomGroup.Residue` and
@@ -87,8 +91,7 @@ Exercise 1
 
     >>> r = u.atoms[100:130].residues
     >>> r.atoms[-1]
-    < Atom 136: name 'O' of type '70' of resname 'ALA', resid 8 and segid '4AKE'>   
- 
+    <Atom 136: O of type 70 of resname ALA, resid 8 and segid 4AKE>
 
 2. Why does the expression ::
 
@@ -113,14 +116,14 @@ Exercise 1
 
      >>> resnames = u.atoms[999:1300].residues.resnames
      >>> resids = u.atoms[999:1300].residues.resids
-     >>> zip(resnames, resids)
+     >>> list(zip(resnames, resids))
 
    How do you obtain the resid and the resname for the 100th residue?
    (Hint: investigate the :class:`~MDAnalysis.core.AtomGroup.Residue`
    object interactively with :kbd:`TAB` completion) ::
 
      >>> r100 = u.atoms.residues[99]
-     >>> print(r100.id, r100.name)
+     >>> print(r100.resid, r100.resname)
      100 GLY
 
 
@@ -145,10 +148,10 @@ Exercise 1
    :class:`~MDAnalysis.core.AtomGroup.ResidueGroup`, and
    :class:`~MDAnalysis.core.AtomGroup.SegmentGroup`
            
-   * :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.numberOfResidues` and 
-     :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.numberOfAtoms`
-   * :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.resids`
-   * :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.resnames`
+   * :attr:`~MDAnalysis.core.groups.AtomGroup.n_residues` and 
+     :attr:`~MDAnalysis.core.groups.AtomGroup.n_atoms`
+   * :attr:`~MDAnalysis.core.groups.AtomGroup.resids`
+   * :attr:`~MDAnalysis.core.groups.AtomGroup.resnames`
 
 
 .. _selections:
@@ -173,8 +176,12 @@ but really any :class:`~MDAnalysis.core.AtomGroup.AtomGroup` has a
   >>> acidic = CA.select_atoms("resname ASP or resname GLU")
   >>> acidic
   >>> <AtomGroup with 35 atoms>
-  >>> acidic.residues
-  <ResidueGroup [<Residue 'GLU', 22>, <Residue 'ASP', 33>, <Residue 'GLU', 44>, <Residue 'ASP', 51>, <Residue 'ASP', 54>, <Residue 'ASP', 61>, <Residue 'GLU', 62>, <Residue 'GLU', 70>, <Residue 'GLU', 75>, <Residue 'ASP', 76>, <Residue 'ASP', 84>, <Residue 'ASP', 94>, <Residue 'GLU', 98>, <Residue 'ASP', 104>, <Residue 'GLU', 108>, <Residue 'ASP', 110>, <Residue 'ASP', 113>, <Residue 'GLU', 114>, <Residue 'ASP', 118>, <Residue 'GLU', 143>, <Residue 'ASP', 146>, <Residue 'ASP', 147>, <Residue 'GLU', 151>, <Residue 'GLU', 152>, <Residue 'ASP', 158>, <Residue 'ASP', 159>, <Residue 'GLU', 161>, <Residue 'GLU', 162>, <Residue 'GLU', 170>, <Residue 'GLU', 185>, <Residue 'GLU', 187>, <Residue 'ASP', 197>, <Residue 'GLU', 204>, <Residue 'ASP', 208>, <Residue 'GLU', 210>]>
+  >>> list(acidic.residues)
+  [<Residue GLU, 22>,
+   <Residue ASP, 33>,
+   <Residue GLU, 44>,
+   ...
+   <Residue GLU, 210>]
   
 .. SeeAlso:: All the `selection keywords`_ are described in the documentation.
 
@@ -182,9 +189,10 @@ Selections can be combined with boolean expression and it is also
 possible to select by geometric criteria, e.g. with the :samp:`around
 {distance} {selection}` keyword::
 
-  u.select_atoms("((resname ASP or resname GLU) and not (backbone or name CB or name CG)) \
+  >>> u.select_atoms("((resname ASP or resname GLU) and not (backbone or name CB or name CG)) \
                    and around 4.0 ((resname LYS or resname ARG) \
                                     and not (backbone or name CB or name CG))").residues
+  <ResidueGroup with 30 residues>
 
 This selection will find atoms potentially involved in salt bridges
 between acidic and basic residues.
@@ -208,6 +216,7 @@ Exercises 2
    i.e. residue by residue in each :func:`list`)::
 
       >>> list(u.select_atoms("resid 100-200").residues) == list(u.atoms.residues[99:200])
+      True
 
    If one wants to get specific residues in scripts one typically uses
    selections instead of slicing because the index in the slice might
