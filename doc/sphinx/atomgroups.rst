@@ -154,7 +154,7 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
    .. function:: theta_NMP(u)
  
       Calculate the NMP-CORE angle for E. coli AdK in degrees from
-      :class:`~MDAnalysis.core.groups.Universe` *u*      
+      :class:`~MDAnalysis.core.universe.Universe` *u*      
 
    Use the following *incomplete* code as a starting point::
 

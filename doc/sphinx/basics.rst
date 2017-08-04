@@ -25,15 +25,15 @@ class :class:`MDAnalysis.core.groups.Atom`), which are grouped in
 loading a **topology** (list of atoms and possibly their connectivity)
 together with a **trajectory** (coordinate information) into the
 central data structure, the
-:class:`~MDAnalysis.core.groups.Universe` object::
+:class:`~MDAnalysis.core.universe.Universe` object::
 
   >>> u = MDAnalysis.Universe(PSF, DCD)
   >>> print(u)
   <Universe with 3341 atoms>
 
 The atoms are stored in the attribute
-:attr:`~MDAnalysis.core.groups.Universe.atoms` of the
-:class:`MDAnalysis.core.groups.Universe`::
+:attr:`~MDAnalysis.core.universe.Universe.atoms` of the
+:class:`MDAnalysis.core.universe.Universe`::
 
   >>> print(u.atoms)
   <AtomGroup with 3341 atoms>
@@ -163,8 +163,8 @@ Selections
 
 MDAnalysis comes with a fairly complete `atom selection`_
 facility. Primarily, one uses the method
-:meth:`~MDAnalysis.core.groups.Universe.select_atoms` of a
-:class:`~MDAnalysis.core.groups.Universe`::
+:meth:`~MDAnalysis.core.universe.Universe.select_atoms` of a
+:class:`~MDAnalysis.core.universe.Universe`::
 
   >>> CA = u.select_atoms("protein and name CA")
   >>> CA
