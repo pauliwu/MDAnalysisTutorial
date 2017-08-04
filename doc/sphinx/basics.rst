@@ -234,8 +234,8 @@ Exercises 2
 
 
 .. _atom selection: 
-   http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html
+   http://docs.mdanalysis.org/documentation_pages/selections.html
 
 .. _selection keywords:
-   http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html#selection-keywords
+   http://docs.mdanalysis.org/documentation_pages/selections.html#selection-keywords
 

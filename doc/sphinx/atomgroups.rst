@@ -233,7 +233,7 @@ You can also write Gromacs_ index files (in case you don't like
 
 
 .. _coordinate file formats: 
-   http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/init.html#id1
+   http://docs.mdanalysis.org/documentation_pages/coordinates/init.html#id1
 .. _selection formats:
-   http://pythonhosted.org/MDAnalysis/documentation_pages/selections_modules.html#selection-exporters
+   http://docs.mdanalysis.org/documentation_pages/selections_modules.html#selection-exporters
 .. _Gromacs: http://www.gromacs.org
