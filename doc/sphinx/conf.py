@@ -157,6 +157,8 @@ html_theme_options = {
     'github_banner': True,
     'show_related': True,
     'fixed_sidebar': False,
+    'sidebar_includehidden': True,
+    'sidebar_collapse': True,
     # style
     'link': color['orange'],
     'link_hover': color['orange'],
