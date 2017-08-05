@@ -10,7 +10,7 @@ from MDAnalysis.tests.datafiles import PSF, DCD
 u = MDAnalysis.Universe(PSF, DCD)
 ref = MDAnalysis.Universe(PSF, DCD)  # copy of u
 
-CORE_selection = "resid 1:29 or resid 60:121 or resid 160:214"
+CORE_selection = "resid 1-29 or resid 60-121 or resid 160-214"
 userdata = "adk_distance.dat"
 vmdscript = "adk_distance.vmd"
 

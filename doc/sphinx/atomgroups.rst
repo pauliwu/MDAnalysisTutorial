@@ -163,7 +163,7 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
 
      def theta_NMP(u):
         """Calculate the NMP-CORE angle for E. coli AdK in degrees"""
-	A = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
+	A = u.select_atoms("resid 115-125 and (backbone or name CB)").center_of_geometry()
 	B = 
 	C = 
 	BA = A - B
