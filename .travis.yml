@@ -1,31 +1,31 @@
 language: python
-python:
-  - '3.4'
+cache: pip
 sudo: false
-before_install:
-  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh
-  - chmod +x miniconda3.sh
-  - ./miniconda3.sh -b -p $(pwd)/miniconda3
-  - export PATH=$(pwd)/miniconda3/bin:$PATH
-  - conda update --yes conda
-install:
-  - conda create --yes -q -n pyenv python=$TRAVIS_PYTHON_VERSION sphinx
-  - source activate pyenv
-script:
-  - |
-    test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
-    (cd ./doc/sphinx && make clean html)
-after_success:
-  - |
-    test ${TRAVIS_PULL_REQUEST} == "false" && \
-    test ${TRAVIS_BRANCH} == ${GH_DOC_BRANCH} && \
-    test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
-    bash ./ci/deploy_docs.sh
+
+python:
+  - '3.6'
+
 env:
   global:
     - secure: "abyGePpHGyLK9u7V/A+dR7T54M02NVDewD/kuqvQ+KE77hKMpZNcWl/nFHJnFEGdV2RLPEo/W/LIr33LtH09s6jkvyBBkpxtCXy9AvIra2FUJIbYBsAhOX2CYviM7EyL27IUCdqTKEmJBX+0cYFS/v68PtHJWXTGW/hlBBNZNII="
-    - GH_DOC_BRANCH: master
-    - GH_REPOSITORY: github.com/MDAnalysis/MDAnalysisTutorial.git
-    - GIT_CI_USER: TravisCI
-    - GIT_CI_EMAIL: TravisCI@mdanalysis.org
-    - MDA_DOCDIR: doc/pages/html
+    - SPHINX_DIR=doc/sphinx
+    - HTML_DIR=doc/sphinx/_build/html
+
+install:
+  - if [[ $TRAVIS_PYTHON_VERSION == "3.6" ]]; then pip install --upgrade sphinx; fi
+
+script:
+  # touch .nojekyll else github-pages messes up theme
+  - make -C ${SPHINX_DIR} html && touch ${HTML_DIR}/.nojekyll
+
+deploy:
+  # stuff related to deploying to gh-pages
+  # GH_TOKEN is set in env:global:secure
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  on:
+    branch: master
+    python: "3.6"
+  local_dir: ${HTML_DIR}
+  project_name: MDAnalysisTutorial
