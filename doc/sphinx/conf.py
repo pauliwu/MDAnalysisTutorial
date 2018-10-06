@@ -35,9 +35,13 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
+    'sphinx_sitemap',
 ]
 
 mathjax_path = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
+# for sitemap with https://github.com/jdillard/sphinx-sitemap
+site_url = "https://www.mdanalysis.org/MDAnalysisTutorial/"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
