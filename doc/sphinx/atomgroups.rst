@@ -210,12 +210,17 @@ method::
    CORE = u.select_atoms("resid 1-29 60-121 160-214")
    CORE.write("AdK_CORE.pdb")
 
-(The extension determines the file type.)
+(The extension determines the file type. Writing a PDB file will result in a
+number of harmless warnings regarding quantities such as *altLocs* or
+*occupancies* that are needed for a PDB file but are not provided by the MD
+files [#pdb_warnings]_; these warnings can be ignored.)
 
 You can do fairly complicated things on the fly, such as writing the
-hydration shell around a protein to a file ::
+hydration shell around a protein to a file [#pdb_warnings]_ ::
 
-   u.select_atoms("byres (name OW and around 4.0 protein)").write("hydration_shell.pdb")
+   from MDAnalysis.tests.datafiles import TPR, XTC
+   w = MDAnalysis.Universe(TPR, XTC)
+   w.select_atoms("byres (name OW and around 4.0 protein)").write("hydration_shell.pdb")
 
 for further analysis or visualization.
 
@@ -227,15 +232,41 @@ a format for an index file (see the supported `index file formats`_)::
   CORE.write("CORE.ndx", name="CORE")
   
 
-.. SeeAlso::  The lists of supported
+.. SeeAlso::  The lists of supported formats:
 
    * `coordinate file formats`_
    * `index file formats`_
 
 
 .. _coordinate file formats: 
-   http://docs.mdanalysis.org/documentation_pages/coordinates/init.html#id1
+   https://www.mdanalysis.org/docs/documentation_pages/coordinates/init.html#id2
 .. _index file formats:
    http://docs.mdanalysis.org/documentation_pages/selections_modules.html#id2
 .. _Gromacs: http://www.gromacs.org
 
+
+.. rubric:: Footnotes
+
+.. [#pdb_warnings] PDB format files contain various data fields that are not
+		   necessarily used in a typical MD simulation such as
+		   *altLocs*, *icodes*, *occupancies*, or *tempfactor*. When
+		   you write a PDB file without providing values for these
+		   parameters, MDAnalysis has to set them to default
+		   values. When MDAnalysis does that, it warns you with output
+		   like ::
+
+		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'altLocs' Using default value of ' '
+                     "".format(attrname, default))
+		     
+                     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'icodes' Using default value of ' '
+                     "".format(attrname, default))
+		     
+  		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'occupancies' Using default value of '1.0'
+		     "".format(attrname, default))
+		     
+		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'tempfactors' Using default value of '0.0'
+		     "".format(attrname, default))
+	
+		   These warnings are for your information and in the context
+		   of this tutorial they are expected and do not indicate a
+		   problem.

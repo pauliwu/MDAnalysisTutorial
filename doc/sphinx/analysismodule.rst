@@ -50,15 +50,17 @@ two structures, using :func:`~MDAnalysis.analysis.rms.rmsd`::
 
    >>> ref = MDAnalysis.Universe(PDB_small)
    >>> mobile = MDAnalysis.Universe(PSF, DCD)
-   >>> rms.rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)
+   >>> mobile_CA = mobile.select_atoms("name CA")
+   >>> ref_CA = ref.select_atoms("name CA")
+   >>> rms.rmsd(mobile_CA.positions, ref_CA.positions)
    28.20178579474479
 
 Note that in this example translations have not been removed. In order
 to look at the pure rotation one needs to superimpose the centres of
 mass (or geometry) first:
 
-   >>> ref0 =  ref.atoms.CA.positions - ref.atoms.CA.center_of_mass()
-   >>> mobile0 =  mobile.atoms.CA.positions - mobile.atoms.CA.center_of_mass()
+   >>> ref0 =  ref_CA.positions - ref_CA.center_of_mass()
+   >>> mobile0 =  mobile_CA.positions - mobile_CA.center_of_mass()
    >>> rms.rmsd(mobile0, ref0)
    21.892591663632704
 
@@ -67,18 +69,19 @@ minimizing the CA-RMSD is obtained with the
 :func:`~MDAnalysis.analysis.align.rotation_matrix` function ::
 
    >>> R, rmsd = align.rotation_matrix(mobile0, ref0)
-   >>> print rmsd
+   >>> print(rmsd)
    6.80939658647
-   >>> print R
+   >>> print(R)
    [[ 0.14514539 -0.27259113  0.95111876]
     [ 0.88652593  0.46267112 -0.00268642]
     [-0.43932289  0.84358136  0.30881368]]   
 
-Putting all this together one can superimpose all of *mobile* onto *ref*::
+Putting all this together one can superimpose all of *mobile* onto
+*ref* and write to, for instance, a PDB file [#pdb_warnings]_::
 
-   >>> mobile.atoms.translate(-mobile.atoms.CA.center_of_mass())
+   >>> mobile.atoms.translate(-mobile_CA.center_of_mass())
    >>> mobile.atoms.rotate(R)
-   >>> mobile.atoms.translate(ref.atoms.CA.center_of_mass())
+   >>> mobile.atoms.translate(ref_CA.center_of_mass())
    >>> mobile.atoms.write("mobile_on_ref.pdb")
 
 
@@ -99,7 +102,7 @@ superimposed on the starting structure.
      ref_com = NMP.select_atoms("name CA").center_of_mass()
      ref0 = NMP.positions - ref_com
 
-   which is then used instead of ``ref.atoms.CA.center_of_mass()``
+   which is then used instead of ``ref_CA.center_of_mass()``
    (which would *change* for each time step).
 
 * You can use the function :func:`MDAnalysis.analysis.rms.rmsd` (with
@@ -134,3 +137,28 @@ with keys "CORE", "NMP", "LID".
    :class:`MDAnalysis.analysis.rms.RMSD` for comprehensive analysis of
    RMSD time series
 
+.. rubric:: Footnotes
+
+.. [#pdb_warnings] PDB format files contain various data fields that are not
+		   necessarily used in a typical MD simulation such as
+		   *altLocs*, *icodes*, *occupancies*, or *tempfactor*. When
+		   you write a PDB file without providing values for these
+		   parameters, MDAnalysis has to set them to default
+		   values. When MDAnalysis does that, it warns you with output
+		   like ::
+
+		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'altLocs' Using default value of ' '
+                     "".format(attrname, default))
+		     
+                     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'icodes' Using default value of ' '
+                     "".format(attrname, default))
+		     
+  		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'occupancies' Using default value of '1.0'
+		     "".format(attrname, default))
+		     
+		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'tempfactors' Using default value of '0.0'
+		     "".format(attrname, default))
+	
+		   These warnings are for your information and in the context
+		   of this tutorial they are expected and do not indicate a
+		   problem.

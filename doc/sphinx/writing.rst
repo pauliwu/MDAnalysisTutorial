@@ -11,7 +11,7 @@ simple PDB or GRO file) and *trajectory* writers (e.g. XTC, DCD, but
 also multi-frame PDB files).
 
 .. _`Table of supported coordinate formats`:
-   http://docs.mdanalysis.org/documentation_pages/coordinates/init.html#id1
+   https://www.mdanalysis.org/docs/documentation_pages/coordinates/init.html#id2
    
 .. _writing-single-frames:
 
@@ -44,9 +44,9 @@ Trajectories
 
 The typical use pattern is to
 
-#. Get a trajectory writer with :func:`MDAnalysis.Writer` (which is
-   the same as :func:`MDAnalysis.coordinates.core.writer`), typically
-   specifying in advance how many atoms a frame will contain.
+#. Get a trajectory writer with :func:`MDAnalysis.Writer
+   <MDAnalysis.coordinates.core.writer>`, typically specifying in
+   advance how many atoms a frame will contain.
 #. Use the :meth:`~MDAnalysis.coordinates.base.Writer.write` method to
    write a new time step to the trajectory.
 #. Close the trajectory with
@@ -152,20 +152,20 @@ slightly modified for this tutorial:
 		   file. Here we load a structure from a PSF topology
 		   file which does not define
 		   :attr:`tempfactors`. Therefore, we first have to
-		   manually add it with the line ::
+		   manually add it with
+		   :func:`Universe.add_TopologyAttr <MDAnalysis.core.universe.Universe.add_TopologyAttr>`
+		   ::
 
-		     u.add_TopologyAttr(MDAnalysis.core.topologyattrs.Tempfactors(np.zeros(len(u.atoms))))
+                     u.add_TopologyAttr('tempfactors')
 
 		   It initializes :attr:`u.atoms.tempfactors`
 		   to be zero for all atoms. We can then later fill
 		   the :attr:`u.atoms.tempfactors` array with
 		   arbitrary values.
 
-		   Starting with MDAnalysis 0.17.0, the explicit
-		   adding of commonly used topology attributes will
-		   not be necessary any more (see Issue `#1359`_).
 
-.. _`#1359`: https://github.com/MDAnalysis/mdanalysis/issues/1359		   
-
-		   
+.. XXX: the link to Universe.add_TopologyAttr does not resolve
+   properly to
+   https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.add_TopologyAttr
+   
 		   

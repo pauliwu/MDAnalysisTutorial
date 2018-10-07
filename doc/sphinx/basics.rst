@@ -178,7 +178,7 @@ but really any :class:`~MDAnalysis.core.groups.AtomGroup` has a
 
   >>> acidic = CA.select_atoms("resname ASP or resname GLU")
   >>> acidic
-  >>> <AtomGroup with 35 atoms>
+  <AtomGroup with 35 atoms>
   >>> list(acidic.residues)
   [<Residue GLU, 22>,
    <Residue ASP, 33>,
@@ -225,8 +225,8 @@ It is also possible to select by `geometric criteria`_, e.g. with the
 :samp:`around {distance} {selection}` keyword::
 
   >>> u.select_atoms("((resname ASP or resname GLU) and not (backbone or name CB or name CG)) \
-                   and around 4.0 ((resname LYS or resname ARG) \
-                                    and not (backbone or name CB or name CG))").residues
+  ...                   and around 4.0 ((resname LYS or resname ARG) \
+  ...                                 and not (backbone or name CB or name CG))").residues
   <ResidueGroup with 30 residues>
 
 This selection will find atoms potentially involved in salt bridges

@@ -175,10 +175,13 @@ list comprehensions (implicit for loops)::
 One can directly **jump to a frame** by using "indexing syntax":
 
   >>> u.trajectory[50]
-  < Timestep 51 with unit cell dimensions array([  0.,   0.,   0.,  90.,  90.,  90.], dtype=float32) >
+  < Timestep 50 with unit cell dimensions array([  0.,   0.,   0.,  90.,  90.,  90.], dtype=float32) >
   >>> ts.frame
   50
 
+.. Note:: Frame indices are 0-based, i.e., the first frame in a
+	  trajectory is 0 and the last one is ``u.trajectory.n_frames - 1``.
+  
 You can also **slice trajectories**, e.g. if you want to start at the 10th
 frame and go to 10th before the end, and only use every 5th frame::
 
@@ -194,11 +197,6 @@ frame and go to 10th before the end, and only use every 5th frame::
    9``.
 
    
-.. Note::
-
-   Not all trajectory readers support direct access and arbitrary
-   slices, although many commonly used ones such as DCD, XTC/TRR, and
-   Amber NETCDF do.
 
 .. SeeAlso:: One can iterate through multiple trajectories in parallel
              with the help of :func:`itertools.izip` from the

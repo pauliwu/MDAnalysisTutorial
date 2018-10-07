@@ -14,9 +14,9 @@ CORE_selection = "resid 1-29 or resid 60-121 or resid 160-214"
 pdbtrj = "adk_distance_bfac.pdb"
 
 
-# workaround for Issue #1359 https://github.com/MDAnalysis/mdanalysis/issues/1359
-# which will be fixed in 0.17.0
-u.add_TopologyAttr(MDAnalysis.core.topologyattrs.Tempfactors(np.zeros(len(u.atoms))))
+# dynamically add new attributes
+# ('tempfactors' is pre-defined and filled with zeros as default values)
+u.add_TopologyAttr('tempfactors')
 
 
 with MDAnalysis.Writer(pdbtrj, multiframe=True, bonds=None, n_atoms=u.atoms.n_atoms) as PDB:
