@@ -10,23 +10,13 @@
 Before you can start the tutorial, you need a working installation of
 MDAnalysis_ (with its test suite, MDAnalysisTests_) on your Linux or Mac
 OS X machine. The following contains hints and links to further
-documentation to facilitate installation of the package. In an ideal
-setting (development tools (gcc tool chain), python development
-headers, full scientific Python stack with numpy, scipy, matplotlib
-already installed, working netcdf/HDF5 library), installation will be
-as simple as ::
-
-   pip install --user MDAnalysis MDAnalysisTests
-
-In a less ideal setting, one typically has to install additional
-packages through the distribution's package manager as described in
-the links under :ref:`local-installation`. 
+documentation to facilitate installation of the package.
 
 .. Note:: For this tutorial, you will need at least version
           |MDAnalysis_version| of MDAnalysis.
 
-.. _MDAnalysis: http://www.mdanalysis.org
-.. _MDAnalysisTests: http://wiki.mdanalysis.org/UnitTests
+.. _MDAnalysis: https://www.mdanalysis.org
+.. _MDAnalysisTests: https://wiki.mdanalysis.org/UnitTests
 
 
 .. _local-installation:
@@ -56,16 +46,16 @@ installed from the `conda-forge anaconda.org channel`_ with conda_ ::
   conda config --add channels conda-forge
   conda update --yes conda  
 
-The current 0.16.x release only fully supports Python 2.7.x (the
-upcoming 0.17 fully supports Python 2.7 and Python 3.4+)  so we need a
-Python 2.7 environment that we call *mdaenv*::
+MDAnalysis fully supports Python 3.4+ and 2.7.x (since release
+0.17.0). We will install a Python 3.6 environment that we call
+*mdaenv*::
 
-  conda create --yes -n mdaenv python=2.7
+  conda create --yes -n mdaenv python=3.6
 
 Install MDAnalysis and the tests including data files in the *mdaenv*
 environment::
 
-  conda install --yes -n mdaenv mdanalysis MDAnalysisTests
+  conda install --yes -n mdaenv MDAnalysis MDAnalysisTests
 
 Activate the installation (has to be done in every shell, whenever you
 want to use MDAnalysis)::
@@ -75,7 +65,7 @@ want to use MDAnalysis)::
 Check success [#prompt]_::
 
   (mdaenv) $ python -c 'import MDAnalysis as mda; print(mda.__version__)'
-  0.16.2
+  0.18.0
  
   
 .. _conda: http://conda.pydata.org/docs/get-started.html
@@ -126,14 +116,21 @@ Testing the installation
 
 .. _test cases: http://wiki.mdanalysis.org/UnitTests
 
-MDAnalysis comes with over 5000 `test cases`_ that check its
+MDAnalysis comes with over 6500 `test cases`_ that check its
 functionality. These test cases can be run with the command ::
 
-  python -c 'from MDAnalysis.tests import test; test()'
+  pytest --disable-pytest-warnings --pyargs MDAnalysisTests
 
-This can take a few minutes. Ideally, you should only get passing
-tests ("ok" or just a single dot ".") or "KnownFailures".
+This can take 20 minutes, so run it when you have spare time (or see
+`test cases`_ for how to run the tests in parallel if you have
+multiple cores).
 
+You should only get passing tests ("ok" or just a single dot ".") or
+"KnownFailures": look for a line such as ::
+
+   ==== 6454 passed, 66 skipped, 1 xfailed, 21956 warnings in 1184.44 seconds =====
+
+which indicates that everything works as expected.   
 
 .. rubric:: Footnotes
 
