@@ -50,9 +50,9 @@ Other quantities that can be easily calculated for a
 
   with :meth:`~MDAnalysis.core.groups.AtomGroup.radius_of_gyration`;
 
-* the principal axes :math:`\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_1`
-  from :meth:`~MDAnalysis.core.groups.AtomGroup.principal_axes` via
-  a diagonalization of the tensor of inertia
+* the principal axes :math:`\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_1` from
+  :meth:`~MDAnalysis.core.groups.AtomGroup.principal_axes` [#principalaxes]_
+  via a diagonalization of the tensor of inertia
   :meth:`~MDAnalysis.core.groups.AtomGroup.moment_of_inertia`,
 
   .. math::
@@ -247,26 +247,71 @@ a format for an index file (see the supported `index file formats`_)::
 
 .. rubric:: Footnotes
 
-.. [#pdb_warnings] PDB format files contain various data fields that are not
-		   necessarily used in a typical MD simulation such as
-		   *altLocs*, *icodes*, *occupancies*, or *tempfactor*. When
-		   you write a PDB file without providing values for these
-		   parameters, MDAnalysis has to set them to default
-		   values. When MDAnalysis does that, it warns you with output
-		   like ::
+.. [#principalaxes] The
+   :meth:`~MDAnalysis.core.groups.AtomGroup.principal_axes` method returns an
+   array ``[p1, p2, p3]`` where the principal axes ``p1``, ``p2``, ``p3`` are
+   arrays of length 3; this layout as row vectors was chosen for convenience
+   (so that one can extract the vectors with ``p1, p2, p3 =
+   ag.principal_axes()``). To form a matrix ``U`` where the principal axes are
+   the column vectors as in the usual treatment of the principal axes one has
+   to transpose. For example::
 
-		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'altLocs' Using default value of ' '
-                     "".format(attrname, default))
-		     
-                     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'icodes' Using default value of ' '
-                     "".format(attrname, default))
-		     
-  		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'occupancies' Using default value of '1.0'
-		     "".format(attrname, default))
-		     
-		     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'tempfactors' Using default value of '0.0'
-		     "".format(attrname, default))
-	
-		   These warnings are for your information and in the context
-		   of this tutorial they are expected and do not indicate a
-		   problem.
+       import MDAnalysis
+       from MDAnalysis.tests.datafiles import PSF, DCD
+       import numpy as np
+
+       u = MDAnalysis.Universe(PSF, DCD)
+
+       CA = u.select_atoms("protein and name CA")
+
+       I = CA.moment_of_inertia()
+       UT = CA.principal_axes()
+
+       # transpose the row-vector layout UT = [p1, p2, p3]
+       U = UT.T
+
+       # test that U diagonalizes I
+       Lambda = U.T.dot(I.dot(U))
+       print(Lambda)
+
+       # check that it is diagonal (to machine precision)
+       print(np.allclose(Lambda - np.diag(np.diagonal(Lambda)), 0))
+
+   The matrix ``Lambda`` should be diagonal, i.e., the off-diagnonal elements
+   should be close to machine precision, and hence the last :func:`print`
+   should show ``True``::
+
+     [[ 5.20816990e+05 -6.56706349e-10 -2.83491351e-12]
+     [-6.62283524e-10  4.74131234e+05 -2.06979926e-11]
+     [-6.56687024e-12 -2.07159142e-11  3.93536829e+05]]
+     True
+
+   Finally, if you want to calculate "by hand"::
+
+     values, evecs = np.linalg.eigh(I)
+     indices = np.argsort(values)
+     U = evecs[:, indices]
+
+
+	    
+.. [#pdb_warnings] PDB format files contain various data fields that are not
+   necessarily used in a typical MD simulation such as *altLocs*, *icodes*,
+   *occupancies*, or *tempfactor*. When you write a PDB file without providing
+   values for these parameters, MDAnalysis has to set them to default
+   values. When MDAnalysis does that, it warns you with output like ::
+
+     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'altLocs' Using default value of ' '
+     "".format(attrname, default))
+
+     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'icodes' Using default value of ' '
+     "".format(attrname, default))
+
+     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'occupancies' Using default value of '1.0'
+     "".format(attrname, default))
+
+     ~/anaconda3/envs/mda3/lib/python3.6/site-packages/MDAnalysis/coordinates/PDB.py:892: UserWarning: Found no information for attr: 'tempfactors' Using default value of '0.0'
+     "".format(attrname, default))
+
+   These warnings are for your information and in the context
+   of this tutorial they are expected and do not indicate a
+   problem.
