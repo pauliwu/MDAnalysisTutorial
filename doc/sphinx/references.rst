@@ -9,7 +9,7 @@
    and O. Beckstein. `MDAnalysis: A Python package for the rapid analysis of
    molecular dynamics simulations`_. In S. Benthall and S. Rostrup, editors,
    *Proceedings of the 15th Python in Science Conference*, pages 102 – 109,
-   Austin, TX, 2016. SciPy.
+   Austin, TX, 2016. SciPy. doi:`10.25080/majora-629e541a-00e`_.
 
 .. [Michaud-Agrawal2011] N. Michaud-Agrawal, E. J. Denning, T. B. Woolf,
    and O. Beckstein. MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics
@@ -31,6 +31,7 @@
 .. _`MDAnalysis: A Python package for the rapid analysis of molecular
    dynamics simulations`:
    http://conference.scipy.org/proceedings/scipy2016/oliver_beckstein.html
+.. _10.25080/majora-629e541a-00e: https://doi.org/10.25080/majora-629e541a-00e
 
 
 .. _10.1016/j.jmb.2009.09.009: http://doi.org/10.1016/j.jmb.2009.09.009
