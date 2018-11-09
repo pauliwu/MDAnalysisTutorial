@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. How to use this tutorial &#8212; MDAnalysis Tutorial 3.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Installing MDAnalysis" href="installation.html" />
+    <link rel="prev" title="MDAnalysis Tutorial" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-use-this-tutorial">
+<h1>1. How to use this tutorial<a class="headerlink" href="#how-to-use-this-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>We will first determine <a class="reference internal" href="#have-you-installed-mdanalysis"><span class="std std-ref">if you need to install MDAnalysis</span></a>.</p>
+<p>After that, the tutorial is designed to be read and worked through by
+yourself at your own pace. It contains short examples that introduce
+important features and ideas. You should run all these examples and
+code snippets yourself. <em>Exercises</em> (with solutions) are
+included. Follow tutorial online in your browser, starting with the
+chapter <a class="reference internal" href="basics.html#chapter-basics"><span class="std std-ref">Basics</span></a>.</p>
+<div class="section" id="have-you-installed-mdanalysis">
+<span id="id1"></span><h2>1.1. Have you installed MDAnalysis?<a class="headerlink" href="#have-you-installed-mdanalysis" title="Permalink to this headline">¶</a></h2>
+<p>Test if you can successfully import MDAnalysis: on the command line
+start the <code class="docutils literal notranslate"><span class="pre">python</span></code> program</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python
+</pre></div>
+</div>
+<p>and type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="k">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do you see <code class="docutils literal notranslate"><span class="pre">&lt;Universe</span> <span class="pre">with</span> <span class="pre">3341</span> <span class="pre">atoms&gt;</span></code> and does the last command
+print 0.18.0 or higher?</p>
+<ul class="simple">
+<li><strong>NO, I need to install MDAnalysis</strong>: If you have not installed
+MDAnalysis yet or if you need to upgrade, start with
+<a class="reference internal" href="installation.html#chapter-installing-mdanalysis"><span class="std std-ref">Installing MDAnalysis</span></a>.</li>
+<li><strong>YES, I have the latest version installed</strong>: You can immediately
+read about the initial <a class="reference internal" href="preparations.html#chapter-preparations"><span class="std std-ref">Preparations</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logos/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. How to use this tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#have-you-installed-mdanalysis">1.1. Have you installed MDAnalysis?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installing MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparations.html">3. Preparations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">4. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomgroups.html">5. Working with AtomGroups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectories.html">6. Trajectory analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing.html">7. Writing coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysismodule.html">8. Using the MDAnalysis.analysis modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">9. References</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="http://mdanalysis.org">MDAnalysis</a></li>
+    
+    <li class="toctree-l1"><a href="http://docs.mdanalysis.org">docs</a></li>
+    
+    <li class="toctree-l1"><a href="http://wiki.mdanalysis.org">wiki</a></li>
+    
+    <li class="toctree-l1"><a href="http://users.mdanalysis.org">user discussion group</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/mdanalysis">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://twitter.com/mdanalysis">@mdanalysis</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">MDAnalysis Tutorial</a></li>
+      <li>Next: <a href="installation.html" title="next chapter">2. Installing MDAnalysis</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015-2017, Oliver Beckstein, Max Linke.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/howto.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/MDAnalysis/mdanalysis" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

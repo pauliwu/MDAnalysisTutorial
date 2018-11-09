@@ -1,0 +1,418 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>4. Basics &#8212; MDAnalysis Tutorial 3.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Working with AtomGroups" href="atomgroups.html" />
+    <link rel="prev" title="3. Preparations" href="preparations.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="basics">
+<span id="chapter-basics"></span><h1>4. Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
+<p>We discuss the fundamental objects in MDAnalysis, the
+<a class="reference internal" href="#universe-and-atomgroup"><span class="std std-ref">Universe and AtomGroup</span></a>, and the facilities for
+<a class="reference internal" href="#selections"><span class="std std-ref">Selections</span></a> of atoms. These selections themselves are again an
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a>.</p>
+<div class="section" id="universe-and-atomgroup">
+<span id="id1"></span><h2>4.1. Universe and AtomGroup<a class="headerlink" href="#universe-and-atomgroup" title="Permalink to this headline">¶</a></h2>
+<p>MDAnalysis is <strong>object oriented</strong>. Molecular systems consist of
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> objects (instances of the
+class <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MDAnalysis.core.groups.Atom</span></code></a>), which are grouped in
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a> instances. You build the
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a> of your system by
+loading a <strong>topology</strong> (list of atoms and possibly their connectivity)
+together with a <strong>trajectory</strong> (coordinate information) into the
+central data structure, the
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Universe</span></code></a> object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="go">&lt;Universe with 3341 atoms&gt;</span>
+</pre></div>
+</div>
+<p>The atoms are stored in the attribute
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">atoms</span></code> of the
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MDAnalysis.core.universe.Universe</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
+<span class="go">&lt;AtomGroup with 3341 atoms&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">[&lt; Atom 1: name &#39;N&#39; of type &#39;56&#39; of resname &#39;MET&#39;, resid 1 and segid &#39;4AKE&#39;&gt;,</span>
+<span class="go"> &lt; Atom 2: name &#39;HT1&#39; of type &#39;2&#39; of resname &#39;MET&#39;, resid 1 and segid &#39;4AKE&#39;&gt;,</span>
+<span class="go"> &lt; Atom 3: name &#39;HT2&#39; of type &#39;2&#39; of resname &#39;MET&#39;, resid 1 and segid &#39;4AKE&#39;&gt;,</span>
+<span class="go"> &lt; Atom 4: name &#39;HT3&#39; of type &#39;2&#39; of resname &#39;MET&#39;, resid 1 and segid &#39;4AKE&#39;&gt;,</span>
+<span class="go"> &lt; Atom 5: name &#39;CA&#39; of type &#39;22&#39; of resname &#39;MET&#39;, resid 1 and segid &#39;4AKE&#39;&gt;]</span>
+</pre></div>
+</div>
+<p>Any <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a> knows the residues
+that the atoms belong to via the attribute
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.residues" title="(in MDAnalysis v0.19)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">residues</span></code></a>, which produces a
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.ResidueGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueGroup</span></code></a>. A
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.ResidueGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueGroup</span></code></a> acts like a list of
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Residue" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a> objects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span>
+<span class="go">&lt;ResidueGroup with 3 residues&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+<span class="go">[&lt;Residue LEU, 6&gt;, &lt;Residue GLY, 7&gt;, &lt;Residue ALA, 8&gt;]</span>
+</pre></div>
+</div>
+<p>Larger organizational units are
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Segment" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Segment</span></code></a> instances, for example one
+protein or all the solvent molecules or simply the whole
+system. <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a>,
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a>,
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Residue" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>, and
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.ResidueGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueGroup</span></code></a> have an
+attribute <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.segments" title="(in MDAnalysis v0.19)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">segments</span></code></a> that
+will list the segment IDs (“segids”) as a
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.SegmentGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SegmentGroup</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">segments</span>
+<span class="go">&lt;SegmentGroup with 1 segment&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span>
+<span class="go">[&lt;Segment 4AKE&gt;]</span>
+</pre></div>
+</div>
+<p>The converse is also true: each “higher” level in the hierarchy also
+know about the <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Residue" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a> and
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Atom" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> instances it contains. For
+example, to list the atoms of the
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.ResidueGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueGroup</span></code></a> we had before:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">atoms</span>
+<span class="go">&lt;AtomGroup with 36 atoms&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="exercise-1">
+<h3>4.1.1. Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">What residue (“resname”) does the last atom belong to in the above
+example?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;Atom 136: O of type 70 of resname ALA, resid 8 and segid 4AKE&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Why does the expression</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">130</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>return <code class="docutils literal notranslate"><span class="pre">False</span></code>?</p>
+<p>Because the complete residues contain more atoms than the arbitrary
+slice of atoms.</p>
+</li>
+<li><p class="first">How many residues are in the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Universe</span></code> <code class="docutils literal notranslate"><span class="pre">u</span></code>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+<span class="go">214</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span>
+<span class="go">214</span>
+</pre></div>
+</div>
+<p>How do you get a list of the residue names (such as <code class="docutils literal notranslate"><span class="pre">[&quot;Ala&quot;,</span>
+<span class="pre">&quot;Gly&quot;,</span> <span class="pre">&quot;Gly&quot;,</span> <span class="pre">&quot;Asp&quot;,</span> <span class="pre">...]</span></code>) and residue numbers (“resid”) for
+atoms 1000 to 1300? And as a list of tuples <code class="docutils literal notranslate"><span class="pre">(resname,</span> <span class="pre">resid)</span></code>
+(Hint: <a class="reference external" href="https://docs.python.org/3/library/functions.html#zip" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a>)?:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">resnames</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">999</span><span class="p">:</span><span class="mi">1300</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">resnames</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resids</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">999</span><span class="p">:</span><span class="mi">1300</span><span class="p">]</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">resids</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">resnames</span><span class="p">,</span> <span class="n">resids</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>How do you obtain the resid and the resname for the 100th residue?
+(Hint: investigate the <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Residue" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>
+object interactively with <kbd class="kbd docutils literal notranslate">TAB</kbd> completion)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r100</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">r100</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">r100</span><span class="o">.</span><span class="n">resname</span><span class="p">)</span>
+<span class="go">100 GLY</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">How many segments are there?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_segments</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>What is the segment identifier of the first
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.Segment" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Segment</span></code></a>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">segid</span>
+<span class="go">&#39;4AKE&#39;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>Methods of <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a>,
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.ResidueGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueGroup</span></code></a>, and
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.SegmentGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SegmentGroup</span></code></a></p>
+<ul class="last simple">
+<li><a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.n_residues" title="(in MDAnalysis v0.19)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_residues</span></code></a> and
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.n_atoms" title="(in MDAnalysis v0.19)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_atoms</span></code></a></li>
+<li><code class="xref py py-attr docutils literal notranslate"><span class="pre">resids</span></code></li>
+<li><code class="xref py py-attr docutils literal notranslate"><span class="pre">resnames</span></code></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="selections">
+<span id="id2"></span><h2>4.2. Selections<a class="headerlink" href="#selections" title="Permalink to this headline">¶</a></h2>
+<p>MDAnalysis comes with a fairly complete <a class="reference external" href="http://docs.mdanalysis.org/documentation_pages/selections.html">atom selection</a>
+facility. Primarily, one uses the method
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe.select_atoms" title="(in MDAnalysis v0.19)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select_atoms()</span></code></a> of a
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Universe</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CA</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein and name CA&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&lt;</span><span class="n">AtomGroup</span> <span class="k">with</span> <span class="mi">214</span> <span class="n">atoms</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>but really any <a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v0.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomGroup</span></code></a> has a
+<a class="reference external" href="https://www.mdanalysis.org/docs/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup.select_atoms" title="(in MDAnalysis v0.19)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">select_atoms()</span></code></a> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">acidic</span> <span class="o">=</span> <span class="n">CA</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resname ASP or resname GLU&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acidic</span>
+<span class="go">&lt;AtomGroup with 35 atoms&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">acidic</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+<span class="go">[&lt;Residue GLU, 22&gt;,</span>
+<span class="go"> &lt;Residue ASP, 33&gt;,</span>
+<span class="go"> &lt;Residue GLU, 44&gt;,</span>
+<span class="go"> ...</span>
+<span class="go"> &lt;Residue GLU, 210&gt;]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">All the <a class="reference external" href="http://docs.mdanalysis.org/documentation_pages/selections.html#selection-keywords">selection keywords</a> are described in the documentation.</p>
+</div>
+<p>Numerical <strong>ranges</strong> can be written as <code class="docutils literal notranslate"><span class="pre">first-last</span></code> (or equivalently
+<code class="docutils literal notranslate"><span class="pre">first:last</span></code> <a class="footnote-reference" href="#ranges" id="id3">[1]</a>), where the range is <em>inclusive</em>. For example, get
+residues with residue IDs 5 to 100:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 5-100&quot;</span><span class="p">)</span>
+<span class="go">&lt;AtomGroup with 1439 atoms&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 5-100&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">n_residues</span>
+<span class="go">96</span>
+</pre></div>
+</div>
+<p>Selections can be combined with <a class="reference external" href="http://www.mdanalysis.org/docs//documentation_pages/selections.html#boolean">boolean expressions</a>. For example,
+to select the <span class="math notranslate nohighlight">\(\text{C}_\alpha\)</span> atoms of all acidic residues
+[aspartic acid (“ASP”), glutamic acid (“GLU”), and histidines (named
+“HIS”, “HSD”, or “HSE”, depending on what force field is being used
+and what protonation state it is in)]:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;(resname ASP or resname GLU or resname HS*) and name CA&quot;</span><span class="p">)</span>
+<span class="go">&lt;AtomGroup with 38 atoms&gt;</span>
+</pre></div>
+</div>
+<p>We group with <code class="docutils literal notranslate"><span class="pre">or</span></code> separate selections by residue name (keyword
+<code class="docutils literal notranslate"><span class="pre">resname</span></code>). First either ASP, GLU, or any histidines are selected
+(we use “stemming” <code class="docutils literal notranslate"><span class="pre">HS*</span></code> to match any residue name that starts with
+“HS”).  Then only those atoms whose name is “CA” are taken from the
+first set by an <code class="docutils literal notranslate"><span class="pre">and</span></code> selection. For convenience, the <code class="docutils literal notranslate"><span class="pre">or</span></code> in the
+first part of the selection can be taken implicitly with the shortcut
+syntax</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resname ASP GLU HS* and name CA&quot;</span><span class="p">)</span>
+<span class="go">&lt;AtomGroup with 38 atoms&gt;</span>
+</pre></div>
+</div>
+<p>The <em>implicit or</em> syntax also works well for range selections such as
+<code class="docutils literal notranslate"><span class="pre">resid</span> <span class="pre">1-5</span> <span class="pre">20</span> <span class="pre">45-99</span> <span class="pre">101-199</span></code>.</p>
+<p>It is also possible to select by <a class="reference external" href="http://www.mdanalysis.org/docs//documentation_pages/selections.html#geometric">geometric criteria</a>, e.g. with the
+<code class="samp docutils literal notranslate"><span class="pre">around</span> <em><span class="pre">distance</span></em> <em><span class="pre">selection</span></em></code> keyword:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;((resname ASP or resname GLU) and not (backbone or name CB or name CG)) </span><span class="se">\</span>
+<span class="gp">... </span><span class="s2">                  and around 4.0 ((resname LYS or resname ARG) </span><span class="se">\</span>
+<span class="gp">... </span><span class="s2">                                and not (backbone or name CB or name CG))&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span>
+<span class="go">&lt;ResidueGroup with 30 residues&gt;</span>
+</pre></div>
+</div>
+<p>This selection will find atoms potentially involved in salt bridges
+between acidic and basic residues.</p>
+<div class="section" id="exercises-2">
+<h3>4.2.1. Exercises 2<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Select the range of resids 100 to 200 (“100-200”) with a
+selection. Compare the result to what you get by slicing the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">u.atoms.residues</span></code> appropriately.</p>
+<p>Which approach would you prefer to use in a analysis script?</p>
+<p>Solution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 100-200&quot;</span><span class="p">)</span>
+<span class="go">&lt;AtomGroup with 1609 atoms&gt;</span>
+</pre></div>
+</div>
+<p>Compare to the slicing solution (doing an element-wise comparison,
+i.e. residue by residue in each <code class="xref py py-func docutils literal notranslate"><span class="pre">list()</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 100-200&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="mi">99</span><span class="p">:</span><span class="mi">200</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>If one wants to get specific residues in scripts one typically uses
+selections instead of slicing because the index in the slice might
+not correspond to the actual residue ids (minus 1): If a number of
+residues (e.g. 150-160) are missing from the structure then the
+selection will simply give you residues 100-149 and 161-200 but the
+slice 99:200 would give you residues 100-149 and <em>161-209</em>.</p>
+</li>
+<li><p class="first">Select all residues that do not contain a <span class="math notranslate nohighlight">\(\mathrm{C}_\beta\)</span>
+(“CB”) atom. How many are there? What residue names did you find?</p>
+<p>Solution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sel</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;(byres name CA) and not (byres name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+<span class="go">20</span>
+</pre></div>
+</div>
+<p>These are all Glycines, as can be seen by comparing the residue
+groups element-wise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">glycines</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resname GLY&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">glycines</span><span class="o">.</span><span class="n">residues</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="ranges" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>For index ranges in atom selections, <code class="docutils literal notranslate"><span class="pre">first-last</span></code> and
+<code class="docutils literal notranslate"><span class="pre">first:last</span></code> are completely equivalent. In this
+tutorial we prefer the form <code class="docutils literal notranslate"><span class="pre">first-last</span></code> to reduce
+confusion with Python slicing <code class="docutils literal notranslate"><span class="pre">group[first:last]</span></code>
+because in the atom selection syntax, <code class="docutils literal notranslate"><span class="pre">last</span></code> is
+<em>included</em> in the selection whereas in Python slicing it
+is <em>excluded</em>.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logos/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howto.html">1. How to use this tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">2. Installing MDAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparations.html">3. Preparations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#universe-and-atomgroup">4.1. Universe and AtomGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selections">4.2. Selections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atomgroups.html">5. Working with AtomGroups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectories.html">6. Trajectory analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="writing.html">7. Writing coordinates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysismodule.html">8. Using the MDAnalysis.analysis modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">9. References</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="http://mdanalysis.org">MDAnalysis</a></li>
+    
+    <li class="toctree-l1"><a href="http://docs.mdanalysis.org">docs</a></li>
+    
+    <li class="toctree-l1"><a href="http://wiki.mdanalysis.org">wiki</a></li>
+    
+    <li class="toctree-l1"><a href="http://users.mdanalysis.org">user discussion group</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/mdanalysis">GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://twitter.com/mdanalysis">@mdanalysis</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="preparations.html" title="previous chapter">3. Preparations</a></li>
+      <li>Next: <a href="atomgroups.html" title="next chapter">5. Working with AtomGroups</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015-2017, Oliver Beckstein, Max Linke.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/basics.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/MDAnalysis/mdanalysis" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
